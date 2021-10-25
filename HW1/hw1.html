@@ -1,0 +1,84 @@
+<html>
+    <body>
+        <pre>
+            <h1>Multiplication Table</h1>
+        </pre>
+        a = <input type=number id=a value=0 onChange="calculate()">
+
+        b = <input type=number id=b value=0 onChange="calculate()">
+        <br><br>
+        Multiplication: <output style="font-weight: bold;" id="mult"></output> 
+        <br><br>
+
+        <table id="tablo" border="3" cellpadding="5"></table>
+        
+        <br><br>
+        <h1>Sample Code</h1>
+        
+
+        
+        <pre> function multiplicationTable(){
+            const L = [1,2,3,4,5,6,7,8,9,10];
+            const X = [1,2,3,4,5,6,7,8,9,10];
+            let row = "<th></th>";
+            for(let j = 0; j< L.length;j++)
+            {
+                row += "<th>"+L[j]+"</th>";
+            }
+            
+            let text = "<tr>"+row+"</tr>";
+            for(let i=0;i<X.length;i++){
+    
+                row = "<th>"+X[i]+"</th>";
+    
+                for(let j=0;j<L.length;j++){
+                    row += "<td>"+"  "+(L[j]) * (X[i])+" "+"</td>";
+                }
+                text += "<tr>"+row+"</tr>";
+            }
+            
+            tablo.innerHTML = text;</pre>
+        
+
+
+    </body>
+</html>
+
+
+<script>
+    
+    multiplicationTable();
+    function calculate(){
+        a=document.getElementById("a").value;
+        b=document.getElementById("b").value;
+        
+        let mult=a*b;
+
+        document.getElementById("mult").innerHTML = mult;
+    }
+    function multiplicationTable(){
+        const L = [1,2,3,4,5,6,7,8,9,10];
+        const X = [1,2,3,4,5,6,7,8,9,10];
+        let row = "<th>"+"x"+"</th>";
+        
+        for(let j = 0; j< L.length;j++)
+        {
+            row += "<th>"+L[j]+"</th>";
+        }
+        
+        let text = "<tr>"+row+"</tr>";
+        for(let i=0;i<X.length;i++){
+
+            row = "<th>"+X[i]+"</th>";
+
+            for(let j=0;j<L.length;j++){
+                row += "<td>"+"  "+(L[j]) * (X[i])+" "+"</td>";
+            }
+
+            text += "<tr>"+row+"</tr>";
+        }
+        
+        tablo.innerHTML = text;
+        
+    }
+</script>
