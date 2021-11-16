@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CW2 </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    input { width: 50px }
+    .out {
+        font-size: 18px;
+        background: blue;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+  </style>
+</head>
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+  <h2>CW2</h2>
+  
+  <b>Sample code</b>
+  <pre>function range(){
+    var array= [];
+    var lower= Math.min.apply(null, arguments);
+    var upper= Math.max.apply(null, arguments);
+
+    for(var i=lower; i <=upper; i++){
+      array.push(i);
+    }
+    return array;
+  }
+
+  function sum(array){
+    return array.reduce((x,y)=>x+y,0);
+
+
+      ---------SAMPLES -------
+      
+  console.log(range(1,10));
+  Sonuç = (10) [1,2,3,4,5,6,7,8,9,10]
+
+  console.log(range(5,2,-1));
+  Sonuç = (7) [-1,0,1,2,3,4,5]
+
+  console.log(sum(range(1,10)));
+  Sonuç = 55
+  </pre>
+  <script>
+    "use strict";
+    // JavaScript comment
+    function range(){
+      var array= [];
+      var lower= Math.min.apply(null, arguments);
+      var upper= Math.max.apply(null, arguments);
+
+      for(var i=lower; i <=upper; i++){
+        array.push(i);
+      }
+      return array;
+    }
+
+    function sum(array){
+      return array.reduce((x,y)=>x+y,0);
+    }
+    </script>
+    </body>
+    </html>
