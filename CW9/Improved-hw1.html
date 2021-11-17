@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <style>
-          body{
-            color: rgb(2, 10, 27);
-            font-size: 15px;
-          }
-        </style>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <meta name="author" content="Uveys Sarac" />
-        <title>ÜVEYS SARAÇ -- HW1</title>
-    </head>
-    <body>
-        <pre>
-            <h1>Multiplication Table</h1>
-        </pre>
-        a = <input type=number id=a value=0 onChange="calculate()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ÜVEYS SARAÇ -- HW1</title>
 
-        b = <input type=number id=b value=0 onChange="calculate()">
-        <br>
-        <br>
-        Multiplication: <output style="font-weight: bold;" id="mult"></output> 
-        <br>
-        <br>
-        <table id="tablo" border="3" cellpadding="5"></table>
-        <br>
-        <br>
-        <a href="https://www.matematikkafe.com/?Syf=18&Hbr=1184433&/%C3%87OCUKLAR-%C3%87ARPIM-TABLOSUNU-%C3%96%C4%9ERENMEKTE-NEDEN-ZORLANIR?" target="_blank">REF</a>
-    <pre>
-        <h1>Referans Tablosu <br><img src="mt.PNG" width="400" height="400" /></h1>
-    </pre>
-   
+ <style>
+    body { max-width: 440px; }
+    pre  { overflow-x: auto; }
+    img  { max-width: 100%; }
+    #out {
+        font-size: larger;
+        line-height: 1.4;
+        color: blue;
+        }
+ </style>
+</head>
+<body>
+
+    <h2>Multiplication Table</h2>
+    <table id="tablo" border="3" cellpadding="5"></table>
     <br>
-    <br>
-    <h1>Sample Code</h1>
+    <hr />
+
+    <b>Original table</b>
+    <p>
+        <img src="mt.PNG" width="400" height="400" />
+        <br>
+        Ref: <a href="https://www.matematikkafe.com/?Syf=18&Hbr=1184433&/%C3%87OCUKLAR-%C3%87ARPIM-TABLOSUNU-%C3%96%C4%9ERENMEKTE-NEDEN-ZORLANIR?" target="_blank">Multiplication Table</a>
+    </p>
+    <hr />
+    <h2>Sample Code</h2>
     <pre>
         function multiplicationTable(){
             const L = [1,2,3,4,5,6,7,8,9,10];
@@ -56,22 +52,13 @@
                 text += "<tr>"+row+"</tr>";
             }
             
-            tablo.innerHTML = text;
-        
+            tablo.innerHTML = text;  
     </pre>
     </body>
 </html>
-<script>
-    
+<script> 
     multiplicationTable();
-    function calculate(){
-        a=document.getElementById("a").value;
-        b=document.getElementById("b").value;
-        
-        let mult=a*b;
-
-        document.getElementById("mult").innerHTML = mult;
-    }
+    
     function multiplicationTable(){
         const L = [1,2,3,4,5,6,7,8,9,10];
         const X = [1,2,3,4,5,6,7,8,9,10];
