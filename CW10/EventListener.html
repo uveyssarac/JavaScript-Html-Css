@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    #url { width: 190px; }
+    span, #url { color: blue; }
+  </style>
+</head>
+
+<body> 
+
+<h2>Battery Status</h2>
+<span id=level></span>
+<h2>Online Status</h2>
+<span id=online></span>
+<h2>Keyboard</h2>
+<p id=comment> "Push a button" </p>
+<p> Key : <span id=keyboard></span></p>
+<hr />
+<b>Sample code</b>
+<pre id=sample>This text is not shown. Why?</pre>
+<hr />
+
+<script>
+    "use strict";
+    // JavaScript comment
+    
+    function init() {
+        navigator.getBattery().then(b =>{
+          if(b.charging==true)level.innerText+="Charging..."
+          if(b.charging==false)level.innerText+="Discharging..."
+          level.innerText += 100*b.level
+        })
+        if(navigator.onLine==true)online.innerText="Connected --online"
+        if(navigator.onLine==false)online.innerText="Disconnected --offline"
+
+        ononline=()=>{
+            online.innerText="Connected --online"
+        }
+        onoffline=()=>{
+            online.innerText="Disconnected --offline"
+        }
+    
+        onkeydown= event =>{
+            keyboard.style.fontSize="20px"
+            keyboard.innerText=event.key 
+    }
+    
+        onkeyup= event =>{
+            keyboard.style.fontSize="20px"
+            keyboard.innerText=" "
+        }
+    }
+    sample.innerText = init;
+    init();
+</script>
+</body>
+</html>
