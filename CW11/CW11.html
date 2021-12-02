@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="../images/icon192.png">
+  <title>GitHub Users</title>
+  <style>
+    body {
+        max-width: 440px;
+    }
+    img {
+        padding-right: 300px; 
+        width: 300px;
+        float: left;
+    }
+    pre { overflow-x: auto; }
+    #out { color: rgb(0, 0, 8); }
+  </style>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+<input type=text id=usr value=blm-fsmvu onChange="readUser()">
+<p id=out>Reading data</p>
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+<p>Ref: 
+  <a href="https://docs.github.com/en/rest/reference/rate-limit" target=NewTab>GitHub API</a> &emsp;
+  <a href="await.html" target=NewTab>await</a>
+</p>
+
+<script>
+"use strict";
+function error(e) {
+  out.innerText = e
+    out.style.color = 'red'
+    console.error(e)
+}
+function cause(s) {
+  switch (s) {
+    case 403:
+      return 'Rate limit exceeded'
+    case 404:
+      return usr.value+' not found'
+    default:
+      return 'Status '+s
+  }
+}
+async function toJSON(url) {
+  try {
+    let r = await fetch(url)
+    if (!r.ok) throw cause(r.status)
+    return r.json()
+  } catch (e) {
+    error(e)
+  }
+}
+async function readUser() {
+    const BR = "<BR>", 
+    URL = "https://api.github.com/users/"
+    let u = await toJSON(URL+usr.value)
+    if (!u || !u.login) 
+      error(usr.value+' not found')
+    //u.login is the same as usr.value
+    out.style.color = ''
+    out.innerHTML = ''
+    //start with a big image
+    let i = document.createElement("img")
+    i.src = u.avatar_url
+    i.align = "left"
+    i.style.height="250px"
+    i.style.width = "260px"
+    out.appendChild(i)
+    
+    // Add name, username, company, location, mail, blog
+    var name = u.name
+    name = name.fontsize(6)
+    name = name.bold()
+    let usrname = u.login
+    usrname = usrname.fontsize(4)
+    usrname = usrname.fontcolor("gray")
+    let company = u.company
+    let loc = u.location
+    let h = u.blog
+    let a = document.createElement("a")
+    a.href = "https://"+h
+    a.target = "NewTab"
+    a.innerText = h
+    out.innerHTML +=BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR
+    +BR+name+BR+usrname+BR+BR+"Company: "+company+BR+"Location: "+
+    loc+BR+"Blog: "
+    out.appendChild(a)
+}
+title.innerText = document.title
+    sample.innerText = toJSON +'\n'+ readUser
+    readUser()
+</script>
+
+</body>
+</html>
