@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ÜVEYS SARAÇ -- HW4</title>
+
+ <style>
+    body { max-width: 440px;
+    
+    }
+    #myDIV {
+  width: 400px;
+  height: 400px;
+  background-color: rgb(143, 200, 223);
+  color: white;
+}
+ </style>
+</head>
+<body>
+
+    <h2>Js Animation </h2>
+    <button type="button" onclick= "myfunc()" >Play</button>
+    <hr />
+    <div id="myDIV">
+          <img src="resim.png" width="75" height="75" id="resim" />
+    </div>
+    <hr />
+    <h2>Sample Code</h2> 
+    <pre>
+
+    const element = document.getElementById("resim");
+    function myfunc(){
+        element.animate({ transform: ["translate(175px,0px) rotate(360deg)","translate(325px,200px) rotate(-360deg) ",
+            "translate(125px,325px) rotate(360deg)","translate(0px,100px) rotate(-360deg)",
+            "translate(125px,0px) rotate(360deg)" ]}, 3000);
+    </pre>        
+    </body>
+</html>
+<script> 
+   "use strict";
+   const element = document.getElementById("resim");
+   function myfunc(){
+    element.animate({ transform: ["translate(175px,0px) rotate(360deg)","translate(325px,200px) rotate(-360deg) ",
+         "translate(125px,325px) rotate(360deg)","translate(0px,100px) rotate(-360deg)",
+         "translate(125px,0px) rotate(360deg)" ]}, 3000);
+   }
+
+</script>
