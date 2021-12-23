@@ -108,16 +108,29 @@ class Graph extends Menu {
   flip() {
     let id = this.context.getImageData(0, 0, this.W, this.H);
     let data = id.data;
-    var renk;
+    var renk=data;
+    //var count=0;
+    //var bool=0;
     for (let i = 0; i < data.length; i += 4) {
-      renk=data;
-      data[i]   = data[(data.length/460)-i];   // red
-     
-      data[i+1] = data[(data.length/460)-i+1]; // green
       
-      data[i+2] = data[(data.length/460)-i+2]; // blue
-     
+      data[i]   = data[data.length-i];
+
+      data[i+1]   = data[data.length-i+1];
+
+      data[i+2]   = data[data.length-i+2];
+
+     // data[i]   = renk[(460-1)*4+i-count];   // red
+      
+     // data[i+1] = renk[(460-1)*4+i+1-count]; // green
+      
+     // data[i+2] = renk[(460-1)*4+i+2-count]; // blue
+     //count+=4+i;
+     //bool=bool+1;
+     /*if(bool%2==0){
+       count=0;
+     }*/
     }
+
     this.context.putImageData(id, 0, 0);
   }
   getPixelAt(x, y) {
