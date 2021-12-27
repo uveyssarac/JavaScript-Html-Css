@@ -1,26 +1,243 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Project </title>
+    <title>Üveys Saraç</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-  <style> /* CSS comment */
-    body { max-width: 440px; }
-    input { width: 50px }
-    .out {
-        font-size: 18px;
-        background: blue;
-        color: white;
-        text-align: center;
-        padding: 10px;
-    }
-  </style>
+        body {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            
+            height: 100%;
+            width: 100%;
+            background-color: cornflowerblue;
+            padding: 20px;
+            font-size: 15px;
+        }
+
+        #title {
+            font-family: cursive;
+            color: rgb(0, 0, 0);
+            user-select: none;
+            text-align: center;
+        }
+
+        #button {
+            background: rgb(109, 10, 10);
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgb(3, 0, 0);
+            border-radius: 50%;
+            position:absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .level {
+            color: rgb(0, 0, 0);
+            background-color:rgb(197, 147, 207);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            border: 2px solid black;
+            transition: all 0.1s;
+            text-align: center;
+            margin-left: 2px;
+        }
+
+        .level:hover {
+            background-color:rgb(18, 71, 88);
+        }
+
+        .level:active {
+            border  : none;
+
+        }
+
+        .scoreTime {
+            background-color:transparent;
+            color: rgb(0, 0, 0);
+            width: 120px;
+            height: 26px;
+            border-radius: 10px;
+            user-select: none;
+            font-size: larger;
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle;
+            margin-top: 15px;
+        }
+
+        #desc {
+            color: rgb(0, 0, 0);
+            background-color:rgb(197, 147, 207);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            border: 2px solid black;
+            font-size: 20px;
+            user-select: none;
+            font-weight: bold;
+            text-align: center;
+        
+        }
+        h1{ 
+            color:rgb(0, 0, 0);
+            background-color:rgb(197, 147, 207);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            border: 2px solid black;
+            font-size: 20px;
+
+        }
+        
+    </style>
 </head>
 
-<body> 
-<h2>YAKINDA EKLENECEK</h2>
-</script>
+<body>
+    <div id="container">
+        <h1 id="title">SHOOT THE TARGET</h1>
+        <p id="desc">Choose a level!</p>
+        <button class="level" type="button" id="restart" onclick='location.reload();'>RESTART</button>
+        <button class="level" type="button" id="easy">EASY</button>
+        <button class="level" type="button" id="medium">MEDIUM</button>
+        <button class="level" type="button" id="hard">HARD</button>
+        <button class="level" type="button" id="expert">EXPERT</button> 
+        <button type="button" id="button"></button>
+        <div class="scoreTime" id="score"></div>
+        <div class="scoreTime" id="time">Time left :</div>
+        
+    </div>
 
+    <script>
+        document.getElementById("time").hidden=true;
+        var score=document.getElementById('score');
+        score.innerHTML="SCORE:";
+        var button = document.querySelector('#button');
+        var div = document.querySelector('div');
+        var w = div.offsetWidth;
+        var h = div.offsetHeight;
+        var counter;
+        var desc=document.getElementById('desc');
+
+        function changeMode() {
+            document.getElementById('easy').hidden = true;
+            document.getElementById('medium').hidden = true;
+            document.getElementById('hard').hidden = true;
+            document.getElementById('expert').hidden = true;
+            document.getElementById('desc').hidden = true;
+            button.disabled = false;
+            button.style.width = "55px";
+            button.style.height = "55px";
+        }
+
+        function displayTime() {
+            var timeleft = 10;
+            var downloadTimer = setInterval(function () {
+                timeleft--;
+                time.innerHTML = "Time left : " + timeleft;
+                if (timeleft <= 0)
+                    clearInterval(downloadTimer);
+            }, 980)
+        }
+
+        function changeLocation() {
+            //counter++;
+            let x = Math.floor(Math.random() * w);
+            let y = Math.floor(Math.random() * h);
+            if (x > w - 60) { x = w - 60; }
+            if (y > h - 60) { y = h - 60; }
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        document.querySelector('#easy').onclick = function () {
+            counter = 0;
+            changeMode();
+            button.onclick = function () {
+                counter++;
+                changeLocation();
+                score.innerHTML="SCORE : " + counter;
+            }
+        }
+
+        document.querySelector('#medium').onclick = function () {
+            document.getElementById("time").hidden=false;
+            displayTime();
+            changeMode();
+            counter = 0;
+            score.innerHTML="SCORE : " + counter;
+            setTimeout(() => {
+                button.disabled = true;
+                alert("Your time is up. Your SCORE : " + counter);
+            }, 10000);
+            button.onclick = function () {
+                counter++;
+                changeLocation();
+                score.innerHTML="SCORE : " + counter;
+            }
+        }
+
+        document.querySelector('#hard').onclick = function () {
+           
+            document.getElementById("time").hidden=false;
+            displayTime();
+            changeMode();
+            counter = 0;
+            score.innerHTML="SCORE : " + counter;
+            setTimeout(() => {
+                button.disabled = true;
+                alert("Your time is up. SCORE : " + counter);
+            }, 10000);
+            button.onclick = function () {
+                counter++;
+                changeLocation();
+                if(button.style.width>"25px"){
+                button.style.width = this.clientWidth - 2 + "px";
+                button.style.height = this.clientHeight - 2 + "px";
+                }
+                score.innerHTML="SCORE : " + counter;
+            }
+        }
+
+        document.querySelector('#expert').onclick = function () {
+            document.getElementById("time").hidden=false;
+            displayTime();
+            counter = 0;
+            changeMode();
+            var intervalID = window.setInterval(changeLocation , 1350);
+            score.innerHTML="SCORE : " + counter;
+            setTimeout(() => {
+                button.disabled = true;
+                alert("Your time is up. SCORE : " + counter);
+                button.hidden=true;
+            }, 10000);
+            button.onclick = function () {
+                counter++;
+                changeLocation();
+                score.innerHTML="SCORE : " + counter;
+            }
+          
+        }  
+    </script>
 </body>
+
 </html>
