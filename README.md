@@ -4,5 +4,4 @@ Advanced Programming Techniques
 
 Advance Programming Techniques [GitHub Page](https://github.com/uveyssarac/AdvancedRepo.git)
 
-## EXAMPLES 
-[CW6](https://uveyssarac.github.io/AdvancedRepo/Cw6.html)
+
